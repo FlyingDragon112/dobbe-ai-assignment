@@ -2,6 +2,12 @@
 
 An AI-powered medical appointment scheduling system with chatbot interface for patients and doctors.
 
+## 📹 Demo Video
+
+[![Dobbe AI Demo](https://img.youtube.com/vi/EFbpBs7OLt8/0.jpg)](https://www.youtube.com/watch?v=EFbpBs7OLt8)
+
+[Watch the demo video on YouTube](https://www.youtube.com/watch?v=EFbpBs7OLt8)
+
 ## ✨ Features
 
 ### Patient Portal
