@@ -18,6 +18,8 @@ import requests
 
 from langchain_community.utilities import SQLDatabase
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
+load_dotenv()
 
 # Initializing FastAPI
 app = FastAPI()
@@ -30,12 +32,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Postgres DB INFO
-DB_HOST = "localhost"
-DB_PORT = "5432"
-DB_NAME = ""
-DB_USER = ""
-DB_PASS = ""
+# Postgres DB INFO (from .env)
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_PORT = os.getenv("DB_PORT", "5432")
+DB_NAME = os.getenv("DB_NAME", "")
+DB_USER = os.getenv("DB_USER", "")
+DB_PASS = os.getenv("DB_PASS", "")
+
 
 # Calendar Info
 SCOPES = [
@@ -94,7 +97,7 @@ def send_email(to_email: str, subject: str, body: str) -> str:
 llm = ChatOpenAI(
     base_url="https://models.github.ai/inference",
     model="openai/gpt-4.1",
-    api_key=""
+    api_key=os.getenv("GITHUB_API_KEY", "")
 )
 
 # Patient Tool 1
@@ -483,7 +486,7 @@ async def chat_doctor(data: ChatRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 # Slack Communication
-SLACK_WEBHOOK_URL = ""
+SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL", "")
 
 def send_slack_notification(message: str) -> str:
     """Send notification to Slack"""
